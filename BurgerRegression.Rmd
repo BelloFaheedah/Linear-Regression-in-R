@@ -1,0 +1,26 @@
+---
+title: "A simple Linear Regression On Sales of Burger"
+output: html_notebook
+---
+
+```{r}
+number_visitors=rnorm(30, 5434, 3.9)
+num_burgers_sold=rnorm(30, 765,2.1)
+number_visitors
+```
+```{r}
+num_burgers_sold
+```
+
+
+```{r}
+burger= data.frame(number_visitors,num_burgers_sold)
+burger
+```
+
+```{r}
+summary(burger)
+```
+```{r}
+plot(burger$number_visitors,burger$num_burgers_sold, col="red", main="Visitors vs Sales scatter plot")
+```
