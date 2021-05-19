@@ -1,0 +1,53 @@
+---
+title: "Predicting Death Rate"
+output: html_notebook
+---
+The municipal corporation of a city has collected some data about the death rate in different cities. The corporation maintains the records of the death rate, availability of doctors, population density, etc. They want to know if there is any significant relation between these factors or other trends that can be predicted by using the data. The corporation wants to use this information to help save lives and develop better emergency services. 
+
+The dataset contains the populations (X1, X2, X3, X4, X5) of total 50 cities. It consists of the following fields. Therefore, a multiple linear regression analysis will be implemented to help the officials find relation
+
+   death_rate=Index of deaths per 100 patients
+   doctor_rate= Number of doctors available per 100,000 residents
+   hospital_rate=Number of hospitals available per 100,000 residents
+   per_cap_income= Index of annual income per person (in thousands of   dollars)
+   pop_density= Number of people residing per square mile
+   num_car_rate= Number of cars per 500 individuals
+  
+```{r}
+deathRate<-read.csv("C:/Users/BELLO FAHEEDAH/Desktop/DASCA_ABDA/Datasets/Datasets/Death_rate_data.csv")
+deathRate
+```
+
+```{r}
+names(deathRate)
+```
+
+```{r}
+deathRate_reg<-lm(deathRate$death_rate~deathRate$doctor_rate+deathRate$hospital_rate +deathRate$per_cap_income + deathRate$pop_density + deathRate$num_car_rate)
+```
+```{r}
+deathRate_reg
+```
+
+```{r}
+summary(deathRate_reg)
+```
+
+It is shown that the column 'num_car_rate' is redundant, so it is removed.
+```{r}
+deathRate_reg2<- lm(deathRate$death_rate~deathRate$doctor_rate+deathRate$hospital_rate +deathRate$per_cap_income + deathRate$pop_density );
+```
+
+
+```{r}
+summary(deathRate_reg2)
+
+```
+From the summary statistics, it is evident that all these 4 variables contribute significantly to the model as shown by the *p-values*. The adjusted_R-squared also indicates that 94.89% of the variation in the model is being explained by the explanatory variables
+
+*deathRate$death_rate = 76.5587 - 0.1020doctor_rate - 0.0116hospital_rate - 1.0878per_cap_income + 0.0989pop_density)* 
+
+The model built on death rate can now be used for predicting the death rate, once given the factors such as doctor rate, per capita income, hospital rate and population density
+
+  
+ 
